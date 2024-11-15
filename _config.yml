@@ -1,0 +1,27 @@
+title: Line Flows and Line Losses
+description: This project calculates the line flows and line losses with the given data
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-remote-theme
+
+
+relative_links:
+  enabled: true
+  collections: true
+include:
+ - CONTRIBUTING.md
+  - README.md
+  - LICENSE.md
+  - COPYING.md
+  - CODE_OF_CONDUCT.md
+  - CONTRIBUTING.md
+  - ISSUE_TEMPLATE.md
+  - PULL_REQUEST_TEMPLATE.md
+
+remote_theme: LeNPaul/Lagrange
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
