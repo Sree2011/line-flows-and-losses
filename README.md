@@ -5,6 +5,18 @@ Finding line flows and line losses in a power system
 
 Consider a power system like in this diagram.
 
+Voltage between bus i and bus j is calculated as,
+
+$$
+V_{ij} = V_{i} - V_{j}
+$$
+
+Voltage between bus j and bus i is calculated as,
+
+$$
+V_{ji} = V_{j} - V_{i} = -V_{ij}
+$$
+
 Current from bus i to bus j is calculated as,
 
 $$
