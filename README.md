@@ -20,7 +20,9 @@ $$
 The lineflows:
 
 $$
-S_{ij} = V_{ij}I_{ij}^{*}\\
+S_{ij} = V_{ij}I_{ij}^{*}
+$$
+$$
 S_{ji} = V_{ji}I_{ji}^{*}
 $$
 
