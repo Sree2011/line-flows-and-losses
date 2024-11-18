@@ -48,7 +48,7 @@ for i = 1:n
         end
     end
 end
-disp(V)
+
 % Calculate currents
 for i = 1:n
     for j = 1:n
@@ -58,7 +58,6 @@ for i = 1:n
         end
     end
 end
-disp(I)
 % Calculate Lineflows and line losses
 for i = 1:n
     for j = 1:n
