@@ -91,6 +91,9 @@ public class lineflow_loss {
                 SL[i][j] = S[i][j].add(S[j][i]);
             }
         }
+
+
+
         // Display results (Optional, remove if you want no output at all)
         ArrayList<String[]> data = new ArrayList<>();  // Initialize an ArrayList to store data
 
@@ -98,10 +101,10 @@ public class lineflow_loss {
             for (int j = 0; j < n; j++) {
                 String[] rowData = new String[5];
                 rowData[0] = String.format("%d-%d", i + 1, j + 1);  // Bus Pair
-                rowData[1] = String.format("%.4f + %.4fj", V[i][j].real, V[i][j].imaginary);  // Voltage
-                rowData[2] = String.format("%.4f + %.4fj", I[i][j].real, I[i][j].imaginary);  // Current
-                rowData[3] = String.format("%.4f + %.4fj", S[i][j].real, S[i][j].imaginary);  // Line Flow
-                rowData[4] = String.format("%.4f + %.4fj", SL[i][j].real, SL[i][j].imaginary);  // Line Loss
+                rowData[1] = String.format("%f + %fj", V[i][j].real, V[i][j].imaginary);  // Use %f instead of %.4f
+                rowData[2] = String.format("%f + %fj", I[i][j].real, I[i][j].imaginary);  // Use %f instead of %.4f
+                rowData[3] = String.format("%f + %fj", S[i][j].real, S[i][j].imaginary);  // Use %f instead of %.4f
+                rowData[4] = String.format("%f + %fj", SL[i][j].real, SL[i][j].imaginary);  // Use %f instead of %.4f
                 data.add(rowData);  // Add the row data to the list
             }
         }
