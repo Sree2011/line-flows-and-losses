@@ -92,28 +92,38 @@ Finding line flows and line losses in a power system.
 
 ## Pseudocode
 
-  Prompt user to enter the number of buses (n)
+FUNCTION main()
+    DISPLAY "Enter the number of buses"
+    INPUT n
+    INITIALISE matrices S, SL, V, I, y with dimensions (n, n)
+    DISPLAY "Enter 1 for impedance and 2 for admittance"
+    INPUT choice
+    get_input(choice,n)
+END FUNCTION
   
-  Initialize matrices S, SL, V, I, y with dimensions (n, n)
-  
-  For each bus i from 0 to n-1:
+FUNCTION get_input(choice,n)
+    FOR i from 0 to n-1:
       Prompt user to enter the voltage at bus (i+1)
-      V[i, i] = input complex voltage
+      INPUT V[i, i]
       Prompt user to enter the current at bus (i+1)
-      I[i, i] = input complex current
+      INPUT I[i, i]
+    END FOR
   
-  Prompt user to choose between impedance or admittance input (choice)
-  
-  If choice is 1:
-      For each bus pair (i, j) from 0 to n-1:
-          Prompt user to enter the impedance between bus (i+1) and (j+1)
-          yij = input complex impedance
-          y[i, j] = 1 / yij
-  Else if choice is 2:
+  IF choice == 1
+    FOR i from 0 to n-1:
+        FOR j FROM 0 to n-1:
+            DISPLAY "enter the impedance between bus (i+1) and (j+1)"
+            yij = input complex impedance
+            y[i, j] = 1 / yij
+        END FOR
+    END FOR
+  ELSE IF choice == 2:
       For each bus pair (i, j) from 0 to n-1:
           Prompt user to enter the admittance between bus (i+1) and (j+1)
           y[i, j] = input complex admittance
-  
+  END FUNCTION
+
+  FUNCTION 
   For each bus pair (i, j) from 0 to n-1:
       If i is not equal to j:
           V[i, j] = V[i, i] - V[j, j]
@@ -128,12 +138,23 @@ Finding line flows and line losses in a power system.
       S[i, j] = V[i, j] * Conjugate(I[i, j])
       S[j, i] = V[j, i] * Conjugate(I[j, i])
       SL[i, j] = S[i, j] + S[j, i]
-  
-  Prepare data for display
-  For each bus pair (i, j) from 0 to n-1:
-      Add data to table: Bus Pair (i+1)-(j+1), Voltage V[i, j], Current I[i, j], Line Flow S[i, j], Line Loss SL[i, j]
-  
-  Display the table with headers "Bus Pair", "Voltage", "Current", "Line Flow", "Line Loss"
+END FUNCTION
+
+FUNCTION display_line_flows(V,I,S,SL,n)
+    CREATE LIST data
+    FOR i from 0 to n-1:
+        FOR j FROM 0 to n-1:
+            ADD "Bus Pair (i+1)-(j+1), Voltage V[i, j], Current I[i, j], Line Flow S[i, j], Line Loss SL[i, j]" TO data
+    
+    DECLARE headers = ["Bus Pair", "Voltage", "Current", "Line Flow", "Line Loss"]
+    FOR i in headers
+        DISPLAY i, end with space
+    END FOR
+    DISPLAY newline
+    FOR i in data
+        DISPLAY i
+    END FOR
+END FUNCTION
 
 
 ## Flowchart
