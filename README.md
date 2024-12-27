@@ -52,94 +52,153 @@ Finding line flows and line losses in a power system.
   $$
 
 ## Algorithm
+Certainly! Here's an algorithm for the provided pseudocode:
 
-1. **Initialize Program**:
-    - Import necessary libraries for matrix operations and table display.
-    - Define a function to take complex input from the user.
+### Algorithm:
 
-2. **Main Process**:
-    - Prompt the user to enter the number of buses.
-    - Initialize matrices to hold the lineflows, line losses, voltages, currents, and admittances.
+Sure! Here's your algorithm in the input, process, and output format:
 
-3. **Take Voltages and Currents Input**:
-    - For each bus, ask the user to provide voltage and current values.
+### **Main Program:**
+**Input:**
+- Number of buses, ` n `
+- User choice for impedance or admittance
 
-4. **Choose Input Type**:
-    - Ask the user to choose between providing impedance values or admittance values:
-        - **If Impedance**:
-            - For each bus pair, ask for the impedance value.
-            - Calculate the admittance for each pair.
-        - **If Admittance**:
-            - For each bus pair, ask for the admittance value directly.
+**Process:**
+- Initialize matrices ` V `, ` I `, and ` y `
+- Get input for voltage and current at each bus
+- Depending on the user choice, input impedance or admittance values and update ` y ` matrix
+- Calculate line flows and line losses
 
-5. **Calculate Voltages**:
-    - For each pair of buses, compute the voltage difference between them.
+**Output:**
+- Display line flows and line losses for each bus pair
 
-6. **Calculate Currents**:
-    - For each pair of buses, compute the current based on the voltage difference and admittance.
+### **Get Input from the User:**
+**Input:**
+- User choice (1 for impedance, 2 for admittance)
+- Voltage at each bus, ` V[i, i] `
+- Current at each bus, ` I[i, i] `
+- Impedance or admittance values between buses
 
-7. **Calculate Lineflows and Line Losses**:
-    - For each pair of buses:
-        - Calculate the line flow using the voltage difference and the conjugate of the current.
-        - Calculate the line losses by summing the line flows for both directions.
+**Process:**
+- For each bus, input voltage and current values
+- If choice is impedance, input impedance values, calculate admittance, and update ` y ` matrix
+- If choice is admittance, input admittance values and update ` y ` matrix
 
-8. **Display Results**:
-    - Prepare the data for display in a table format.
-    - Print the results in a table with columns for bus pairs, voltages, currents, line flows, and line losses.
+**Output:**
+- Return matrices ` V `, ` I `, and ` y `
 
-9. **Execute the Main Process**:
-    - Call the main process to execute the program.
+### **Calculate Line Flows and Line Losses:**
+**Input:**
+- Number of buses, ` n `
+- Matrices ` V `, ` I `, and ` y `
+
+**Process:**
+- Initialize matrices ` S ` and ` SL `
+- For each bus pair, calculate voltage differences
+- For each bus pair, calculate current values using admittance and voltage differences
+- For each bus pair, calculate line flows and line losses
+
+**Output:**
+- Return matrices ` S ` and ` SL `
+
+### **Display the Line Flows and Line Losses:**
+**Input:**
+- Matrices ` V `, ` I `, ` S `, and ` SL `
+- Number of buses, ` n `
+
+**Process:**
+- Create a list named `data`
+- For each bus pair, add bus pair information, voltage, current, line flow, and line loss to `data`
+- Declare headers and display them
+- Display data for each bus pair
+
+**Output:**
+- Display line flows and line losses for each bus pair
+
 
 ## Pseudocode
 
+<pre>
+<h2><b>MAIN PROGRAM: </b></h2>
 FUNCTION main()
     DISPLAY "Enter the number of buses"
     INPUT n
-    INITIALISE matrices S, SL, V, I, y with dimensions (n, n)
+    INITIALISE matrices V, I, y with dimensions (n, n)
     DISPLAY "Enter 1 for impedance and 2 for admittance"
     INPUT choice
-    get_input(choice,n)
+    V,I,y = get_input(n,V,I,y)
+    S,SL = calculate_line_flow_loss(n,V,I,y)
+    display_output(n,V,I,S,SL)
 END FUNCTION
-  
+</pre>
+
+
+<pre>
+<h2><b>GET INPUT FROM THE USER: </b></h2>
 FUNCTION get_input(choice,n)
     FOR i from 0 to n-1:
-      Prompt user to enter the voltage at bus (i+1)
+      DISPLAY "enter the voltage at bus (i+1)"
       INPUT V[i, i]
-      Prompt user to enter the current at bus (i+1)
+      DISPLAY "enter the current at bus (i+1)"
       INPUT I[i, i]
     END FOR
   
-  IF choice == 1
+    IF choice == 1
+        FOR i from 0 to n-1:
+            FOR j FROM 0 to n-1:
+                DISPLAY "enter the impedance between bus (i+1) and (j+1)"
+                INPUT yij
+                y[i, j] = 1 / yij
+            END FOR
+        END FOR
+    ELSE IF choice == 2:
+        FOR i from 0 to n-1:
+            FOR j FROM 0 to n-1:
+            DISPLAY "enter the admittance between bus (i+1) and (j+1)"
+            INPUT y[i, j]
+            END FOR
+        END FOR
+    END IF
+
+    RETURN V,I,y
+END FUNCTION
+</pre>
+
+<pre>
+<h2><b>CALCULATE LINE FLOWS AND LINE LOSSES: </b></h2>
+FUNCTION calculate_line_flow_loss(n,V,I,y)
+    INITIALISE MATRICES S,SL with dimensions (n,n)
     FOR i from 0 to n-1:
         FOR j FROM 0 to n-1:
-            DISPLAY "enter the impedance between bus (i+1) and (j+1)"
-            yij = input complex impedance
-            y[i, j] = 1 / yij
+            IF i is not equal to j:
+                V[i, j] = V[i, i] - V[j, j]
+                V[j, i] = V[j, j] - V[i, i]
+            END IF
         END FOR
     END FOR
-  ELSE IF choice == 2:
-      For each bus pair (i, j) from 0 to n-1:
-          Prompt user to enter the admittance between bus (i+1) and (j+1)
-          y[i, j] = input complex admittance
-  END FUNCTION
 
-  FUNCTION 
-  For each bus pair (i, j) from 0 to n-1:
-      If i is not equal to j:
-          V[i, j] = V[i, i] - V[j, j]
-          V[j, i] = V[j, j] - V[i, i]
-  
-  For each bus pair (i, j) from 0 to n-1:
-      If i is not equal to j:
-          I[i, j] = y[i, j] * (V[i, i] - V[j, j])
-          I[j, i] = y[j, i] * (V[j, j] - V[i, i])
-  
-  For each bus pair (i, j) from 0 to n-1:
-      S[i, j] = V[i, j] * Conjugate(I[i, j])
-      S[j, i] = V[j, i] * Conjugate(I[j, i])
-      SL[i, j] = S[i, j] + S[j, i]
+    FOR i from 0 to n-1:
+        FOR j FROM 0 to n-1:
+            IF i is not equal to j:
+                I[i, j] = y[i, j] * (V[i, i] - V[j, j])
+                I[j, i] = y[j, i] * (V[j, j] - V[i, i])
+            END IF
+        END FOR
+    END FOR
+
+    FOR i from 0 to n-1:
+        FOR j FROM 0 to n-1:
+            S[i, j] = V[i, j] * Conjugate(I[i, j])
+            S[j, i] = V[j, i] * Conjugate(I[j, i])
+            SL[i, j] = S[i, j] + S[j, i]
+        END FOR
+    END FOR
+    RETURN S,SL
 END FUNCTION
+</pre>
 
+<pre>
+<h2><b>DISPLAY THE LINE FLOWS AND LINE LOSSES: </b></h2>
 FUNCTION display_line_flows(V,I,S,SL,n)
     CREATE LIST data
     FOR i from 0 to n-1:
@@ -154,16 +213,14 @@ FUNCTION display_line_flows(V,I,S,SL,n)
     FOR i in data
         DISPLAY i
     END FOR
-END FUNCTION
 
+END FUNCTION
+</pre>
 
 ## Flowchart
 
 ```mermaid
-flowchart TD
-A([Start]) --> B[\Take no.of buses as input\]
-B --> C[[Initialize matrices S, SL, V, I, y with dimensions (n, n)]]
-C --> D
+
 ```
 
 
