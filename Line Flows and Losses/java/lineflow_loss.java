@@ -27,10 +27,10 @@ public class lineflow_loss {
 
         // Take voltages and currents as input
         for(int i=0;i<n;i++){
-            System.out.println("Enter voltage at bus "+i);
+            System.out.println("Enter voltage at bus "+(i+1));
             String s = sc.nextLine();
             V[i][i] = Complex.fromString(s);
-            System.out.println("Enter current at bus "+i);
+            System.out.println("Enter current at bus "+(i+1));
             String t = sc.nextLine();
             I[i][i] = Complex.fromString(t);
         }
@@ -74,12 +74,13 @@ public class lineflow_loss {
         // Calculate currents
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if(i!= j){
-                    I[i][j] = I[i][i].subtract(I[j][j]);
-                    I[j][i] = I[j][j].subtract(I[i][i]);
+                if (i != j) {
+                    I[i][j] = y[i][j].multiply(V[i][i].subtract(V[j][j]));
+                    I[j][i] = y[j][i].multiply(V[j][j].subtract(V[i][i]));
                 }
             }
         }
+        
         // Calculate Lineflows and line losses
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
@@ -101,10 +102,10 @@ public class lineflow_loss {
             for (int j = 0; j < n; j++) {
                 String[] rowData = new String[5];
                 rowData[0] = String.format("%d-%d", i + 1, j + 1);  // Bus Pair
-                rowData[1] = String.format("%f + %fj", V[i][j].real, V[i][j].imaginary);  // Use %f instead of %.4f
-                rowData[2] = String.format("%f + %fj", I[i][j].real, I[i][j].imaginary);  // Use %f instead of %.4f
-                rowData[3] = String.format("%f + %fj", S[i][j].real, S[i][j].imaginary);  // Use %f instead of %.4f
-                rowData[4] = String.format("%f + %fj", SL[i][j].real, SL[i][j].imaginary);  // Use %f instead of %.4f
+                rowData[1] = String.format("%.4f + %.4fj", V[i][j].real, V[i][j].imaginary);  // Use %f instead of %.4f
+                rowData[2] = String.format("%.4f + %.4fj", I[i][j].real, I[i][j].imaginary);  // Use %f instead of %.4f
+                rowData[3] = String.format("%.4f + %.4fj", S[i][j].real, S[i][j].imaginary);  // Use %f instead of %.4f
+                rowData[4] = String.format("%.4f + %.4fj", SL[i][j].real, SL[i][j].imaginary);  // Use %f instead of %.4f
                 data.add(rowData);  // Add the row data to the list
             }
         }
@@ -118,4 +119,6 @@ public class lineflow_loss {
             System.out.printf("%-10s %-20s %-20s %-20s %-20s%n", row[0], row[1], row[2], row[3], row[4]);
         }
     }
+
+    
 }

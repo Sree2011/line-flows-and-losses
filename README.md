@@ -1,10 +1,8 @@
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 # Line Flows and Line Losses
 
 Finding line flows and line losses in a power system.
 
-![A sample bus system](https://github.com/user-attachments/assets/5e8a3816-cd88-49b9-abd2-7cedb479baed)
-
-Consider a power system like in the above diagram.
 
 ## Formulas for Calculation
 
@@ -91,8 +89,6 @@ Consider a power system like in the above diagram.
 
 ## Pseudocode
 
-Initialize matrices for lineflows, line losses, voltages, currents, and admittances
-
   Prompt user to enter the number of buses (n)
   
   Initialize matrices S, SL, V, I, y with dimensions (n, n)
@@ -135,6 +131,21 @@ Initialize matrices for lineflows, line losses, voltages, currents, and admittan
       Add data to table: Bus Pair (i+1)-(j+1), Voltage V[i, j], Current I[i, j], Line Flow S[i, j], Line Loss SL[i, j]
   
   Display the table with headers "Bus Pair", "Voltage", "Current", "Line Flow", "Line Loss"
+
+
+## Flowchart
+
+```mermaid
+flowchart TD
+A([Start]) --> B[\Take no.of buses as input\]
+B --> C[[Initialize matrices S, SL, V, I, y with dimensions (n, n)]]
+C --> D
+```
+
+
+
+
+
 
 ## Actual Code
 

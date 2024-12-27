@@ -52,6 +52,7 @@ def main():
                 I[i, j] = y[i, j] * (V[i, i] - V[j, j])
                 I[j, i] = y[j, i] * (V[j, j] - V[i, i])
 
+    print(I)
 
     # Calculate Lineflows and line losses
     for i in range(n):
