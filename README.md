@@ -52,21 +52,16 @@ Finding line flows and line losses in a power system.
   $$
 
 ## Algorithm
-Certainly! Here's an algorithm for the provided pseudocode:
-
-### Algorithm:
-
-Sure! Here's your algorithm in the input, process, and output format:
 
 ### **Main Program:**
 **Input:**
-- Number of buses, ` n `
+- Number of buses, `n`
 - User choice for impedance or admittance
 
 **Process:**
-- Initialize matrices ` V `, ` I `, and ` y `
+- Initialize matrices `V`, `I`, and `y`
 - Get input for voltage and current at each bus
-- Depending on the user choice, input impedance or admittance values and update ` y ` matrix
+- Depending on the user choice, input impedance or admittance values and update `y` matrix
 - Calculate line flows and line losses
 
 **Output:**
@@ -135,7 +130,7 @@ END FUNCTION
 
 <pre>
 <h2><b>GET INPUT FROM THE USER: </b></h2>
-FUNCTION get_input(choice,n)
+FUNCTION get_input(n,V,I,y)
     FOR i from 0 to n-1:
       DISPLAY "enter the voltage at bus (i+1)"
       INPUT V[i, i]
@@ -220,6 +215,31 @@ END FUNCTION
 ## Flowchart
 
 ```mermaid
+graph TB
+subgraph "main()"
+    direction TB
+    A1([Start]) --> B1[\Display "Enter the no.of buses"\]
+    B1 --> C1[/Input n/]
+    C1 --> D1[["Initialise matrices V,I,y with dimensions (n,n)"]]
+    D1 --> E1[\Display "Enter 1 for impedance and 2 for admittance"\]
+    E1 --> F1[/Input choice/]
+    F1 --> G1[["Call get_input(n,V,I,y)"]]
+    G1 --> H1[/store the result into V,I and y/]
+    H1 --> I1[["Call calculate_line_flow_loss(n,V,I,y)"]]
+    I1 --> J1[/store the result into S and SL/]
+    J1 --> K1[["Call display_output(n,V,I,S,SL)"]]
+    K1 --> M1([End])
+end
+
+subgraph "get_input(n,V,I,y)"
+    direction TB
+    A2([Start]) --> B2[for i from 0 to n-1]@{shape: hex}
+    B2 --> C2[\Display "Enter voltage at bus i"\]
+    C2 --> C3[/"Input V[i,i]"/]
+    C3 --> C4[\Display "Enter current at bus i"\]
+    C4 --> C5[/"Input I[i,i]"/]
+
+end
 
 ```
 
