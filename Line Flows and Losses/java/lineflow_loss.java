@@ -1,30 +1,64 @@
 import java.util.*;
 
+/**
+ * Main class to calculate line flows and losses
+ * 
+ * Functions:
+ * 1. get_input(n,V,I,Y): Takes input from the user
+ * 2. calculate_lineflow_loss(n,V,I,y): Calculates line flows and losses
+ * 3. display_output(n,V,I,S,SL): Displays the output
+ * 4. main(): Main function to run the program
+ */
 public class lineflow_loss {
+    /**
+     * Scanner object to take input from the user
+     */
     static Scanner sc = new Scanner(System.in);
+
+    /**
+     * Main function to run the program
+     * @param args
+     */
     public static void main(String[] args) {
         System.out.println("Enter the number of buses:");
         int n = sc.nextInt();
         sc.nextLine();
         // Initialise matrices
-        Complex[][] S = new Complex[n][n];
         Complex[][] V = new Complex[n][n];
         Complex[][] I = new Complex[n][n];
         Complex[][] y = new Complex[n][n];
-        Complex[][] SL = new Complex[n][n];
+        
         
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                S[i][j] = new Complex(0, 0);
                 V[i][j] = new Complex(0, 0);
                 I[i][j] = new Complex(0, 0);
                 y[i][j] = new Complex(0, 0);
-                SL[i][j] = new Complex(0, 0);
-                
             }
         }
 
+        ArrayList<Complex[][]> input = get_input(n, V, I, y);
+        V = input.get(0);
+        I = input.get(1);
+        y = input.get(2);
 
+        ArrayList<Complex[][]> output = calculate_lineflow_loss(n, V, I, y);
+        Complex[][] S = output.get(0);
+        Complex[][] SL = output.get(1);
+
+        display_output(n, V, I, S, SL);
+    
+    }
+
+    /**
+     * Function to take input from the user
+     * @param n total no.of buses
+     * @param V voltage matrix
+     * @param I current matrix
+     * @param y line admittance matrix
+     * @return ArrayList of matrices V,I,y
+     */
+    public static ArrayList<Complex[][]> get_input(int n, Complex[][] V, Complex[][] I, Complex[][] y) {
         // Take voltages and currents as input
         for(int i=0;i<n;i++){
             System.out.println("Enter voltage at bus "+(i+1));
@@ -61,7 +95,29 @@ public class lineflow_loss {
                     y[i][j] = Complex.fromString(s);
                 }
             }
-        } 
+        }
+
+
+        ArrayList<Complex[][]> res = new ArrayList<>();
+        res.add(V);
+        res.add(I);
+        res.add(y);
+        return res;
+    }
+
+
+    /**
+     * Function to calculate line flows and losses
+     * @param n total no.of buses
+     * @param V voltage matrix
+     * @param I current matrix
+     * @param y line admittance matrix
+     * @return ArrayList of matrices S,SL
+     */
+    public static ArrayList<Complex[][]> calculate_lineflow_loss(int n,Complex[][] V, Complex[][] I, Complex[][] y){
+        Complex[][] S = new Complex[n][n];
+        Complex[][] SL = new Complex[n][n];
+
         // Calculate voltages
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -93,8 +149,22 @@ public class lineflow_loss {
             }
         }
 
+        ArrayList<Complex[][]> res = new ArrayList<>();
+        res.add(S);
+        res.add(SL);
+        return res;
+    }
 
 
+    /**
+     * Function to display the output
+     * @param n total no.of buses
+     * @param V voltage matrix
+     * @param I current matrix
+     * @param S line flow matrix
+     * @param SL line loss matrix
+     */
+    public static void display_output(int n, Complex[][] V,Complex[][] I, Complex[][] S,Complex[][] SL){
         // Display results (Optional, remove if you want no output at all)
         ArrayList<String[]> data = new ArrayList<>();  // Initialize an ArrayList to store data
 
@@ -119,6 +189,7 @@ public class lineflow_loss {
             System.out.printf("%-10s %-20s %-20s %-20s %-20s%n", row[0], row[1], row[2], row[3], row[4]);
         }
     }
+    
 
     
 }
