@@ -16,7 +16,6 @@ include:
   - LICENSE.md
   - COPYING.md
   - CODE_OF_CONDUCT.md
-  - CONTRIBUTING.md
   - ISSUE_TEMPLATE.md
   - PULL_REQUEST_TEMPLATE.md
 
@@ -27,6 +26,9 @@ kramdown:
   input: GFM
   auto_ids: true
   math_engine: mathjax
+
+mermaid:
+  version: 11.4.1
 
 defaults:
   - scope:
