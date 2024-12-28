@@ -25,13 +25,11 @@ markdown: kramdown
 kramdown:
   input: GFM
   auto_ids: true
-  math_engine: mathjax
 
 mermaid:
   version: 11.4.1
 
-defaults:
-  - scope:
-      path: ""
-    values:
-      mathjax: true
+mathjax:
+  enable: true
+
+usemathjax: true
