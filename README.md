@@ -243,7 +243,7 @@ subgraph "get_input(n,V,I,y)"
     H2 --> I2[choice]@{shape: diam}
     I2 --> |1| I3[for i from 0 to n-1]@{shape: hex}
     I3 --> I4[for j from 0 to n-1]@{shape: hex}
-    I4 --> I5[\Display "Enter impedance between bus i+1 and j+1"\]
+    I4 --> I5["Display 'Enter impedance between bus i+1 and j+1'"]@{shape: lean-left}
     I5 --> I6[/Input yij/]
     I6 --> I7["Assign reciprocal of yij to y[i,j]"]
     I7 --> I8[Next iteration]
