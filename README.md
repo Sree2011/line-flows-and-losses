@@ -238,7 +238,7 @@ subgraph "get_input(n,V,I,y)"
     C2 --> D2[/"`Input V[i,i]`"/]
     D2 --> E2[\"`Display **Enter current at bus i**`"\]
     E2 --> F2[/"Input I[i,i]"/]
-    F2 --> G2[\"` Display Enter 1 for impedance and 2 for admittance`"\]
+    F2 --> G2["` Display Enter 1 for impedance and 2 for admittance`"]
     G2 --> H2[/Input choice/]
     H2 --> I2[choice]@{shape: diam}
     I2 --> |1| I3[for i from 0 to n-1]@{shape: hex}
