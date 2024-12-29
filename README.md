@@ -216,7 +216,7 @@ END FUNCTION
 
 ## Flowchart
 
-<div class="mermaid">
+```mermaid
 graph TB
 subgraph "main()"
     direction TB
@@ -263,7 +263,7 @@ end
 subgraph "calculate_lineflow_loss(n,V,I,y)"
 end
 
-</div>
+```
 
 
 
