@@ -28,6 +28,7 @@ kramdown:
 
 mermaid:
   enable: true
+  version: 11.4.1
 
 mathjax:
   enable: true
