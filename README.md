@@ -1,5 +1,8 @@
+<head>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/+esm"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js"></script>
+</head>
+
 ## View this project on github: [Github - Line flows and line losses](https://github.com/Sree2011/line-flows-and-losses/)
 
 # Line Flows and Line Losses
