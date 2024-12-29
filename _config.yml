@@ -19,19 +19,16 @@ include:
   - ISSUE_TEMPLATE.md
   - PULL_REQUEST_TEMPLATE.md
 
-remote_theme: benbalter/retlab
+remote_theme: jeffatoptics/jeff-minima
 markdown: kramdown
 kramdown:
   input: GFM
   auto_ids: true
 
-mermaid:
-  version: 11.4.1
-  enable: true
+
 
 
 mathjax:
   enable: true
 
 usemathjax: true
-usemermaid: true
