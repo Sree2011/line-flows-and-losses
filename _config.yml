@@ -27,8 +27,11 @@ kramdown:
 
 mermaid:
   version: 11.4.1
+  enable: true
+
 
 mathjax:
   enable: true
 
 usemathjax: true
+usemermaid: true
