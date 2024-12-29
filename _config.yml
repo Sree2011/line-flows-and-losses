@@ -26,7 +26,8 @@ kramdown:
   auto_ids: true
 
 
-
+mermaid:
+  enable: true
 
 mathjax:
   enable: true
